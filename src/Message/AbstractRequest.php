@@ -15,8 +15,6 @@ abstract class AbstractRequest extends OmnipayAbstractRequest
 
     abstract protected function validateRequest(): void;
 
-    abstract protected function getAction(): string;
-
     public function getEndpoint(): string
     {
         return $this->endpoints[$this->getNetwork()] ?? NULL;
@@ -34,8 +32,6 @@ abstract class AbstractRequest extends OmnipayAbstractRequest
 
     public function sendData($data)
     {
-        $query = http_build_query($data, '', '&');
-
         $httpResponse = $this->httpClient->request('GET', $this->getEndpoint() . $data);
 
         return $this->createResponse(json_decode($httpResponse->getBody()->getContents()));

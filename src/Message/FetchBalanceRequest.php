@@ -11,9 +11,9 @@ class FetchBalanceRequest extends AbstractRequest
         );
     }
 
-    protected function getData(): string
+    public function getData(): string
     {
-        return 'address/' . $this->getAddress();
+        return '/accounts/' . $this->getAddress();
     }
 
     public function getAddress()
