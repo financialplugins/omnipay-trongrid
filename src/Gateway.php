@@ -17,7 +17,7 @@ class Gateway extends AbstractGateway
     public function getDefaultParameters()
     {
         return [
-            'network' => 'trongrid',
+            'network' => 'api.trongrid.io',
         ];
     }
 

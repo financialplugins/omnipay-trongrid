@@ -12,14 +12,14 @@ This step is required before using other methods.
 $gateway = Omnipay::create('Trongrid');
    
 $gateway->initialize([
-    'network' => 'trongrid' // 'shasta' can also be used
+    'network' => 'api.trongrid.io' // 'api.shasta.trongrid.io'
 ]);
 ```
 
 ### Fetch Address Balance
 
 ```
-$response = $gateway->fetchBalance(['address' => '0xAAAAAAAAAA...'])->send();
+$response = $gateway->fetchBalance(['address' => '4158b637e78d6f2069a50976c4e3719a1d8bea7cea'])->send();
 
 if ($response->isSuccessful()) {
     $data = $response->getData();
@@ -27,6 +27,8 @@ if ($response->isSuccessful()) {
     $errorMessage = $response->getMessage();
 }
 ```
+
+Note that the account balance is returned in SUN, not decimal.
 
 ## Support
 If you are having general issues with Omnipay, we suggest posting on [Stack Overflow](http://stackoverflow.com/). Be sure to add the [omnipay](omnipay) tag so it can be easily found.

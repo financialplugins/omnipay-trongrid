@@ -6,18 +6,13 @@ use Omnipay\Common\Message\AbstractRequest as OmnipayAbstractRequest;
 
 abstract class AbstractRequest extends OmnipayAbstractRequest
 {
-    protected $endpoints = [
-        'trongrid' => 'https://api.trongrid.io/v1',
-        'shasta' => 'https://api.shasta.trongrid.io/v1'
-    ];
-
     protected $responseClass = Response::class;
 
     abstract protected function validateRequest(): void;
 
     public function getEndpoint(): string
     {
-        return $this->endpoints[$this->getNetwork()] ?? NULL;
+        return 'https://' . $this->getNetwork() . '/v1';
     }
 
     public function getNetwork(): string
