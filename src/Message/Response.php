@@ -8,9 +8,7 @@ class Response extends AbstractResponse
 {
     public function isSuccessful()
     {
-        return isset($this->data->data)
-            && isset($this->data->success)
-            && $this->data->success == TRUE;
+        return !empty(array_keys((array) $this->data)) && !isset($this->data->Error);
     }
 
     /**
@@ -20,7 +18,7 @@ class Response extends AbstractResponse
      */
     public function getMessage()
     {
-        return ($this->data->statusCode ?? 'UNKNOWN') . ' - ' . ($this->data->error ?? 'Unknown');
+        return $this->data->Error ?? 'UNKNOWN';
     }
 
     /**
@@ -30,8 +28,6 @@ class Response extends AbstractResponse
      */
     public function getData()
     {
-        return isset($this->data->data) && isset($this->data->data[0]) && isset($this->data->data[0]->balance)
-            ? $this->data->data[0]->balance
-            : 0;
+        return $this->data;
     }
 }

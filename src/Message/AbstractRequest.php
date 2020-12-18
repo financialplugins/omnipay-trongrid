@@ -6,13 +6,15 @@ use Omnipay\Common\Message\AbstractRequest as OmnipayAbstractRequest;
 
 abstract class AbstractRequest extends OmnipayAbstractRequest
 {
+    protected $query;
+
     protected $responseClass = Response::class;
 
     abstract protected function validateRequest(): void;
 
-    public function getEndpoint(): string
+    public function getApiUrl(): string
     {
-        return 'https://' . $this->getNetwork() . '/v1';
+        return 'https://' . $this->getNetwork() . '/' . $this->query;
     }
 
     public function getNetwork(): string
@@ -27,7 +29,11 @@ abstract class AbstractRequest extends OmnipayAbstractRequest
 
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->request('GET', $this->getEndpoint() . $data);
+        $headers = [
+            'Content-Type' => 'application/json'
+        ];
+
+        $httpResponse = $this->httpClient->request('POST', $this->getApiUrl(), $headers, json_encode($data));
 
         return $this->createResponse(json_decode($httpResponse->getBody()->getContents()));
     }

@@ -4,6 +4,10 @@ namespace Omnipay\Trongrid\Message;
 
 class FetchBalanceRequest extends AbstractRequest
 {
+    protected $query = 'wallet/getaccount';
+
+    protected $responseClass = FetchBalanceResponse::class;
+
     protected function validateRequest(): void
     {
         $this->validate(
@@ -11,9 +15,11 @@ class FetchBalanceRequest extends AbstractRequest
         );
     }
 
-    public function getData(): string
+    public function getData()
     {
-        return '/accounts/' . $this->getAddress();
+        return [
+            'address' => $this->getAddress()
+        ];
     }
 
     public function getAddress()

@@ -35,4 +35,9 @@ class Gateway extends AbstractGateway
     {
         return $this->createRequest(FetchBalanceRequest::class, $parameters);
     }
+
+    public function fetchTransaction(array $parameters = [])
+    {
+        return $this->createRequest(FetchTransactionRequest::class, $parameters);
+    }
 }

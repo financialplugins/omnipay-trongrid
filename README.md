@@ -30,6 +30,18 @@ if ($response->isSuccessful()) {
 
 Note that the account balance is returned in SUN, not decimal.
 
+### Fetch Transaction Info
+
+```
+$response = $gateway->fetchTransaction(['transaction_id' => '109a0ea9b4c50f15f6a73ee823dabafe020471b6fcb4340059252bd19fd6320f'])->send();
+
+if ($response->isSuccessful()) {
+    $data = $response->getData();
+} else {
+    $errorMessage = $response->getMessage();
+}
+```
+
 ## Support
 If you are having general issues with Omnipay, we suggest posting on [Stack Overflow](http://stackoverflow.com/). Be sure to add the [omnipay](omnipay) tag so it can be easily found.
 
