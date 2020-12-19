@@ -18,7 +18,8 @@ class FetchBalanceRequest extends AbstractRequest
     public function getData()
     {
         return [
-            'address' => $this->getAddress()
+            'address' => $this->getAddress(),
+            'visible' => TRUE
         ];
     }
 
